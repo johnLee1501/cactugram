@@ -5,7 +5,7 @@ from cactus.models import CactusModel, PictureModel
 
 @admin.register(CactusModel)
 class CactusAdmin(admin.ModelAdmin):
-    list_display = ('cactus_name', 'cactus_scientific_name', 'cactus_size', 'cactus_id')
+    list_display = ('id', 'cactus_name', 'cactus_scientific_name', 'cactus_size')
 
 
 @admin.register(PictureModel)

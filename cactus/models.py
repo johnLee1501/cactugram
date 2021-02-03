@@ -5,11 +5,10 @@ from django.db import models
 
 class CactusModel(models.Model):
     SIZE_CHOICES = [('S', 'Pequeño'), ('M', 'Mediano'), ('L', 'Grande')]
-    cactus_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     cactus_name = models.CharField(max_length=50)
     cactus_scientific_name = models.CharField(max_length=50, null=True, blank=True)
     cactus_description = models.TextField(max_length=200, null=True, blank=True)
-    cactus_size = models.CharField(max_length=1, choices=SIZE_CHOICES, blank=False)
+    cactus_size = models.CharField(max_length=1, choices=SIZE_CHOICES)
 
     class Meta:
         db_table = 'cactus'

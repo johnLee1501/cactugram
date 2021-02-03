@@ -1,16 +1,42 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse_lazy
-from django.views.generic import ListView, CreateView
-
-from cactus.forms import PictureForm, CactusForm
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from cactus.models import CactusModel, PictureModel
+
+
+class PostListView(ListView):
+    model = CactusModel
+    template_name = 'home.html'
+    context_object_name = 'cactus'
+    # ordering = ['-date_posted']
+    paginate_by = 4
 
 
 class RegistrarCactus(CreateView):
     model = CactusModel
     template_name = "formulario_cactus.html"
     fields = ['cactus_name', 'cactus_scientific_name', 'cactus_description', 'cactus_size']
+    success_url = reverse_lazy('cactus-listar')
+
+
+class ActualizarCactus(UpdateView):
+    model = CactusModel
+    template_name = 'formulario_cactus.html'
+    fields = ['cactus_name', 'cactus_scientific_name', 'cactus_description', 'cactus_size']
+    success_url = reverse_lazy('cactus-listar')
+
+
+class EliminarCactus(DeleteView):
+    model = CactusModel
+    success_url = reverse_lazy('cactus-listar')
+    template_name = 'confirmar_eliminar_cactus.html'
+
+
+class RegistrarFotoCactus(CreateView):
+    model = PictureModel
+    template_name = "formulario_foto_cactus.html"
+    fields = ['picture_file', 'picture_cactus']
     success_url = reverse_lazy('listar')
 
 
