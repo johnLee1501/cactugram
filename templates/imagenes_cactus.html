@@ -1,0 +1,44 @@
+{% extends "base/base.html" %}
+{% block content %}
+{% for picture in pictures %}
+    <div class="jumbotron mt-3 bg-white shadow-lg">
+
+    <article class="media content-section shadow">
+    <a href="#" target="_blank"> <img src="{{ picture.picture_file.url }}" alt=""
+                                      class="article-img rounded-circle img-thumbnail img-fluid shadow">
+    </a>
+    <div class="media-body">
+    <div class="article-metadata d-flex justify-content-between">
+        <a class="mr-2 " href="#"><h3>{{ picture.picture_date }}</h3></a>
+        {#                        <small class="text-muted">{{ cactu.cactus_scientific_name }}</small>#}
+    </div>
+    <img class="img-fluid mt-3 border rounded" src="{{ picture.picture_file.url }}" alt="#">
+{#    <div class="col-lg-4 offset-lg-4">#}
+{#        <img class="img-fluid mt-3 border rounded" src="{{ picture.picture_file.url }}" alt="#">#}
+{#    </div>#}
+</div>
+</article>
+</div>
+{% endfor %}
+{% if is_paginated %}
+
+    {% if page_obj.has_previous %}
+        <a class="btn btn-outline-info mb-4" href="?page=1">First</a>
+        <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+    {% endif %}
+
+    {% for num in page_obj.paginator.page_range %}
+        {% if page_obj.number == num %}
+            <a class="btn btn-info mb-4" href="?page={{ num }}">{{ num }}</a>
+        {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+            <a class="btn btn-outline-info mb-4" href="?page={{ num }}">{{ num }}</a>
+        {% endif %}
+    {% endfor %}
+
+    {% if page_obj.has_next %}
+        <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.next_page_number }}">Next</a>
+        <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+    {% endif %}
+
+{% endif %}
+{% endblock content %}

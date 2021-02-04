@@ -1,11 +1,11 @@
 from django.http import HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from cactus.models import CactusModel, PictureModel
 
 
-class PostListView(ListView):
+class ListarCactus(ListView):
     model = CactusModel
     template_name = 'home.html'
     context_object_name = 'cactus'
@@ -13,10 +13,11 @@ class PostListView(ListView):
     paginate_by = 4
 
 
+
 class RegistrarCactus(CreateView):
     model = CactusModel
     template_name = "formulario_cactus.html"
-    fields = ['cactus_name', 'cactus_scientific_name', 'cactus_description', 'cactus_size']
+    fields = ['cactus_name', 'cactus_scientific_name', 'cactus_description', 'cactus_size', 'cactus_picture', 'cactus_date']
     success_url = reverse_lazy('cactus-listar')
 
 
@@ -37,22 +38,17 @@ class RegistrarFotoCactus(CreateView):
     model = PictureModel
     template_name = "formulario_foto_cactus.html"
     fields = ['picture_file', 'picture_cactus']
-    success_url = reverse_lazy('listar')
+    success_url = reverse_lazy('cactus-listar')
 
-
-class PostListView(ListView):
-    model = CactusModel
-    template_name = 'home.html'
-    context_object_name = 'cactus'
-    ordering = ['cactus_name']
+class ListarImagenesCactus(ListView):
+    model = PictureModel
+    template_name = 'imagenes_cactus.html'
+    context_object_name = 'pictures'
     paginate_by = 4
 
-    def get_context_data(self, **kwargs):
-        # Call the base implementation first to get the context
-        context = super(PostListView, self).get_context_data(**kwargs)
-        # Create any data and add it to the context
-        context['some_data'] = 'This is just some data'
-        return context
+    def get_queryset(self):
+        cactus = get_object_or_404(CactusModel, id=self.kwargs.get('pk'))
+        return PictureModel.objects.filter(picture_cactus_id=cactus.id).order_by('-picture_date')
 
 
 def list_post(request):
