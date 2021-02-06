@@ -1,4 +1,5 @@
 {% extends "base/base.html" %}
+{% load crispy_forms_tags %}
 {% block content %}
     {% for cactu in cactus %}
         <div class="jumbotron mt-3 bg-white shadow-lg">
@@ -9,7 +10,8 @@
                 </a>
                 <div class="media-body">
                     <div class="article-metadata d-flex justify-content-between">
-                        <a class="mr-2 " href="{% url 'cactus-pictures' cactu.id %}"><h3>{{ cactu.cactus_name }}</h3></a>
+                        <a class="mr-2 " href="{% url 'cactus-pictures' cactu.id %}"><h3>{{ cactu.cactus_name }}</h3>
+                        </a>
                         <small class="text-muted">{{ cactu.cactus_scientific_name }}</small>
                     </div>
                     {#          {% if post.file %}#}
@@ -28,6 +30,49 @@
                     </div>
                     <small class="text-muted">{{ cactu.cactus_date }}</small>
                 </div>
+
+                <!-- Modal -->
+                <div class="modal fade" id="addCactus" tabindex="-1" aria-labelledby="exampleModalLabel"
+                     aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class=" content-section pt-2 mt-3 shadow-lg">
+                                    <form action="" method="POST" enctype="multipart/form-data">
+                                        {% csrf_token %}
+                                        <fieldset class="form-group">
+                                            <legend class="border-bottom mb-4">
+                                                Cactus
+                                            </legend>
+                                            {{ form | crispy }}
+                                        </fieldset>
+                                        <div class="form-group">
+
+                                            <button class="btn btn-outline-primary" type="submit"><i
+                                                    class="fas fa-upload"></i>
+                                                Upload
+                                            </button>
+                                        </div>
+                                    </form>
+
+                                </div>
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary">Save changes</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
             </article>
         </div>
     {% endfor %}
