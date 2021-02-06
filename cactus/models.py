@@ -12,6 +12,7 @@ class CactusModel(models.Model):
     cactus_size = models.CharField(max_length=1, choices=SIZE_CHOICES)
     cactus_picture = models.ImageField(upload_to='pictures/miniatures')
     cactus_date = models.DateField(default=date.today)
+
     class Meta:
         db_table = 'cactus'
 
