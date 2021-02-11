@@ -9,24 +9,27 @@
                 </a>
                 <div class="media-body">
                     <div class="article-metadata d-flex justify-content-between">
-                        <a class="mr-2 " href="{% url 'cactus-pictures' cactu.id %}"><h3>{{ cactu.cactus_name }}</h3></a>
+                        <a class="mr-2 " href="{% url 'cactus-pictures' cactu.id %}"><h3>{{ cactu.cactus_name }}</h3>
+                        </a>
                         <small class="text-muted">{{ cactu.cactus_scientific_name }}</small>
                     </div>
-                    {#          {% if post.file %}#}
-                    {#          <a href="{{ post.file.url }}"  download class="text-dark text-justify "><h5>{{ post.blog }}</h5></a>#}
-                    {#          {% endif %}#}
-
                     <div class="d-flex justify-content-between">
                         <p class="article-content text-justify text-truncate overflow-hidden">{{ cactu.cactus_description }}</p>
-
-                        {#            {% if post.file %}#}
-                        {#          <div class="form-group mt-0 pt-0  m-2">#}
-                        {#            <a class="btn btn-outline-primary  btn-d "  href="{{ post.file.url }}"  download type="submit"><i class="fas fa-download"></i></a>#}
-                        {#          </div>#}
-                        {#          {% endif %}#}
-
                     </div>
-                    <small class="text-muted">{{ cactu.cactus_date }}</small>
+
+                    <div class="d-flex justify-content-between">
+                        <small class="text-muted">{{ cactu.cactus_date }}</small>
+                        <div class="">
+                            <a href="{% url 'cactus-actualizar' cactu.id %}">
+                                <i class="fa fa-edit" style="font-size:14px; color:dodgerblue"></i>
+                            </a>
+                            <a href="{% url 'cactus-eliminar' cactu.id %}">
+                                <i class="fa fa-trash-alt" style="font-size:14px; color:orangered" ></i>
+                            </a>
+                        </div>
+                    </div>
+
+
                 </div>
             </article>
         </div>

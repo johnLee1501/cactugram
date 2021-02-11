@@ -13,18 +13,19 @@ class ListarCactus(ListView):
     paginate_by = 4
 
 
-
 class RegistrarCactus(CreateView):
     model = CactusModel
     template_name = "formulario_cactus.html"
-    fields = ['cactus_name', 'cactus_scientific_name', 'cactus_description', 'cactus_size', 'cactus_picture', 'cactus_date']
+    fields = ['cactus_name', 'cactus_scientific_name', 'cactus_description', 'cactus_size', 'cactus_picture',
+              'cactus_date']
     success_url = reverse_lazy('cactus-listar')
 
 
 class ActualizarCactus(UpdateView):
     model = CactusModel
     template_name = 'formulario_cactus.html'
-    fields = ['cactus_name', 'cactus_scientific_name', 'cactus_description', 'cactus_size']
+    fields = ['cactus_name', 'cactus_scientific_name', 'cactus_description', 'cactus_size', 'cactus_picture',
+              'cactus_date']
     success_url = reverse_lazy('cactus-listar')
 
 
@@ -40,9 +41,10 @@ class RegistrarFotoCactus(CreateView):
     fields = ['picture_file', 'picture_cactus']
     success_url = reverse_lazy('cactus-listar')
 
+
 class ListarImagenesCactus(ListView):
     model = PictureModel
-    template_name = 'imagenes_cactus.html'
+    template_name = 'galeria_cactus.html'
     context_object_name = 'pictures'
     paginate_by = 4
 
