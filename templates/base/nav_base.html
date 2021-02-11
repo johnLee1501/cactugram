@@ -15,10 +15,9 @@
             </form>
             <ul class="navbar-nav ml-2">
                 <li class="nav-item nav-icon">
-                    <a class="btn btn-secondary" style="color: white" data-bs-placement="bottom" title="Agregar"
-                       href="{% url 'cactus-crear' %}">
-                        <i class="fas fa-plus"></i>
-                    </a>
+                    {% block button %}
+
+                    {% endblock %}
                 </li>
             </ul>
         </div>
