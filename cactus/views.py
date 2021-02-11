@@ -10,7 +10,7 @@ class ListarCactus(ListView):
     template_name = 'home.html'
     context_object_name = 'cactus'
     # ordering = ['-date_posted']
-    paginate_by = 4
+    paginate_by = 3
 
 
 class RegistrarCactus(CreateView):
