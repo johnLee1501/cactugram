@@ -17,9 +17,10 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path
+from django.views.generic import TemplateView
 
 from cactus.views import RegistrarCactus, RegistrarFotoCactus, ActualizarCactus, EliminarCactus, ListarCactus, \
-    ListarImagenesCactus
+    ListarImagenesCactus, ActualizarFotoCactus, EliminarFotoCactus
 
 urlpatterns = [
                   path('admin/', admin.site.urls),
@@ -29,6 +30,7 @@ urlpatterns = [
                   path('cactus/<int:pk>/eliminar/', EliminarCactus.as_view(), name='cactus-eliminar'),
                   path('cactus/pictures/<int:pk>', ListarImagenesCactus.as_view(), name='cactus-pictures'),
                   path('foto/crear', RegistrarFotoCactus.as_view(), name='subir_foto'),
-                  # path('solicitud/nueva$', PictureCreate.as_view(), name='picture_crear'),
-                  # path('home/', list_post, name='home')
+                  path('foto/<int:pk>/actualizar', ActualizarFotoCactus.as_view(), name='foto-actualizar'),
+                  path('foto/<int:pk>/eliminar/', EliminarFotoCactus.as_view(), name='foto-eliminar'),
+                  path('index', TemplateView.as_view(template_name='index.html'), name='index'),
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
