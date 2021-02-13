@@ -9,9 +9,9 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent ">
-            <form class="d-flex ">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-success ml-2" type="submit">Search</button>
+            <form id="searchform" action="{% url 'search' %}" method="get" class="d-flex ">
+                <input class="form-control me-2" type="text" name="q" value="{{ request.GET.q }}"  placeholder="Search" aria-label="Search">
+                <button class="btn btn-success ml-2" onclick="searchform.submit()" type="submit">Search</button>
             </form>
             <ul class="navbar-nav ml-2">
                 <li class="nav-item nav-icon">

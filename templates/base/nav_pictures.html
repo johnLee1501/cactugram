@@ -1,7 +1,8 @@
 {% extends "base/nav_base.html" %}
+
 {% block button %}
     <a class="btn btn-secondary" style="color: white" data-bs-placement="bottom" title="Agregar"
-       href="{% url 'subir_foto' %}">
+       href="{% url 'subir_foto' cactus.id %}">
         <i class="fas fa-plus"></i>
     </a>
 {% endblock %}

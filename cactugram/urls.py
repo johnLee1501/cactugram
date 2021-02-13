@@ -19,6 +19,7 @@ from django.contrib import admin
 from django.urls import path
 from django.views.generic import TemplateView
 
+from cactus import views
 from cactus.views import RegistrarCactus, RegistrarFotoCactus, ActualizarCactus, EliminarCactus, ListarCactus, \
     ListarImagenesCactus, ActualizarFotoCactus, EliminarFotoCactus
 
@@ -29,8 +30,10 @@ urlpatterns = [
                   path('cactus/<int:pk>/actualizar/', ActualizarCactus.as_view(), name='cactus-actualizar'),
                   path('cactus/<int:pk>/eliminar/', EliminarCactus.as_view(), name='cactus-eliminar'),
                   path('cactus/pictures/<int:pk>', ListarImagenesCactus.as_view(), name='cactus-pictures'),
-                  path('foto/crear', RegistrarFotoCactus.as_view(), name='subir_foto'),
-                  path('foto/<int:pk>/actualizar', ActualizarFotoCactus.as_view(), name='foto-actualizar'),
-                  path('foto/<int:pk>/eliminar/', EliminarFotoCactus.as_view(), name='foto-eliminar'),
+                  path('foto/crear/<int:pk>', RegistrarFotoCactus.as_view(), name='subir_foto'),
+                  path('foto/<int:pk>/actualizar/<int:pk_cactus>', ActualizarFotoCactus.as_view(),
+                       name='foto-actualizar'),
+                  path('foto/<int:pk>/eliminar/<int:pk_cactus>', EliminarFotoCactus.as_view(), name='foto-eliminar'),
                   path('index', TemplateView.as_view(template_name='index.html'), name='index'),
+                  path('search/', views.search, name='search'),
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
