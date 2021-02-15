@@ -85,7 +85,7 @@ class ActualizarFotoCactus(UpdateView):
 
 class EliminarFotoCactus(DeleteView):
     model = PictureModel
-    template_name = 'confirmar_eliminar_cactus.html'
+    template_name = 'confirmar_eliminar_foto.html'
 
     def get_success_url(self):
         cactus_id = self.kwargs['pk_cactus']
