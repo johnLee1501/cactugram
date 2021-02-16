@@ -1,15 +1,18 @@
 # Cactugram
 
-En proceso...
+Este proyecto trata de una sencilla aplicación web desarrollada con Django, en la cual puedes registrar cactus y puedes crear una galería para cada uno de ellos. 
 
 ### Algunas caracteristicas principales: 
+- Realizar las operaciones básicas sobre cada uno de los modelos (Crear, Editar, Listar, Eliminar)
+- Subir Fotografías 
+- Visualizar la galería de fotografías de cada cactus
+- Realizar busqueda de cactus por nombre y nombre científico
 
-...
 
 
 ## Getting Started
 
-Estas instrucciones le proporcionarán una copia del proyecto en funcionamiento en su máquina local con fines de desarrollo y prueba.
+Estas instrucciones te proporcionarán una copia del proyecto en funcionamiento en tu máquina local con fines de desarrollo y prueba.
 
 ### Prerrequisito
 
@@ -34,14 +37,26 @@ pip install virtualenvwrapper-win
 mkvirtualenv <nombre_del_entorno>
 ```
 
-después de eso, instale los paquetes en requirements.txt para asegurarse de tener todo lo necesario
+después de eso, instala los paquetes en requirements.txt para asegurarte de tener todo lo necesario
 
 ```
 pip install -r requirements.txt
 ```
 
-finalmente, realice las migraciones correspondientes al modelo
-
+finalmente configura tu servidor de base de datos Mysql, puedes hacerlo fácilmente utilizando laragon si tu sistema operativo es Windows. Ten en cuenta la siguiente configuración de settings.py, puedes modificarla de ser necesario
+```python
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'cactugram',
+        'USER': 'root',
+        'PASSWORD': '',
+        'HOST': 'localhost',
+        'PORT': '3306',
+    }
+}
+```
+por último realiza las migraciones de tu modelo a la base de datos.
 ```
 py manage.py makemigrations
 py manage.py migrate
