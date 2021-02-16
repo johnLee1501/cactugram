@@ -22,7 +22,7 @@ class ListarCactus(ListView):
     template_name = 'home.html'
     context_object_name = 'cactus'
     ordering = ['-cactus_date']
-    paginate_by = 3
+    paginate_by = 2
 
 
 class RegistrarCactus(CreateView):
@@ -51,7 +51,7 @@ class ListarImagenesCactus(ListView):
     model = PictureModel
     template_name = 'galeria_cactus.html'
     context_object_name = 'pictures'
-    paginate_by = 6
+    paginate_by = 3
 
     def get_queryset(self):
         cactus = get_object_or_404(CactusModel, id=self.kwargs.get('pk'))
