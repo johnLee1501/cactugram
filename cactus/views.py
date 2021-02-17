@@ -66,11 +66,15 @@ class ListarImagenesCactus(ListView):
 class RegistrarFotoCactus(CreateView):
     model = PictureModel
     template_name = "formulario_foto_cactus.html"
-    fields = ['picture_file', 'picture_cactus']
+    fields = ['picture_file']
 
     def get_success_url(self):
         cactus_id = self.kwargs['pk']
         return reverse_lazy('cactus-pictures', kwargs={'pk': cactus_id})
+
+    def form_valid(self, form):
+        form.instance.picture_cactus_id = self.kwargs['pk']
+        return super().form_valid(form)
 
 
 class ActualizarFotoCactus(UpdateView):
