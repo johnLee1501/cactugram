@@ -36,7 +36,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'cactus',
-    'users',
+    'users.apps.UsersConfig',
     'crispy_forms',
 ]
 

@@ -35,6 +35,10 @@ class RegistrarCactus(LoginRequiredMixin, CreateView):
               'cactus_date']
     success_url = reverse_lazy('cactus-listar')
 
+    def form_valid(self, form):
+        form.instance.user_id = self.request.user.id
+        return super().form_valid(form)
+
 
 class ActualizarCactus(LoginRequiredMixin, UpdateView):
     model = CactusModel

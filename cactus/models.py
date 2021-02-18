@@ -1,11 +1,13 @@
 import uuid
 from datetime import date
 
+from django.contrib.auth.models import User
 from django.db import models
 
 
 class CactusModel(models.Model):
     SIZE_CHOICES = [('S', 'Pequeño'), ('M', 'Mediano'), ('L', 'Grande')]
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     cactus_name = models.CharField(max_length=50)
     cactus_scientific_name = models.CharField(max_length=50, null=True, blank=True)
     cactus_description = models.TextField(max_length=500, null=True, blank=True)

@@ -16,18 +16,20 @@ Including another URLconf
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
-from django.contrib.auth.views import LoginView
+from django.contrib.auth.views import LoginView, LogoutView
 from django.urls import path
 from django.views.generic import TemplateView
 
 from cactus import views
 from cactus.views import RegistrarCactus, RegistrarFotoCactus, ActualizarCactus, EliminarCactus, ListarCactus, \
     ListarImagenesCactus, ActualizarFotoCactus, EliminarFotoCactus
-from users.views import register
+from users.views import register, profile
 
 urlpatterns = [
                   path('admin/', admin.site.urls),
                   path('login/', LoginView.as_view(template_name='users/login.html'), name='login'),
+                  path('logout/', LogoutView.as_view(), name='logout'),
+                  path('profile/', profile, name='profile'),
                   path('register/', register, name='register'),
                   path('', ListarCactus.as_view(), name='cactus-listar'),
                   path('cactus/crear', RegistrarCactus.as_view(), name='cactus-crear'),
