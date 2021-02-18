@@ -16,15 +16,19 @@ Including another URLconf
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
+from django.contrib.auth.views import LoginView
 from django.urls import path
 from django.views.generic import TemplateView
 
 from cactus import views
 from cactus.views import RegistrarCactus, RegistrarFotoCactus, ActualizarCactus, EliminarCactus, ListarCactus, \
     ListarImagenesCactus, ActualizarFotoCactus, EliminarFotoCactus
+from users.views import register
 
 urlpatterns = [
                   path('admin/', admin.site.urls),
+                  path('login/', LoginView.as_view(template_name='users/login.html'), name='login'),
+                  path('register/', register, name='register'),
                   path('', ListarCactus.as_view(), name='cactus-listar'),
                   path('cactus/crear', RegistrarCactus.as_view(), name='cactus-crear'),
                   path('cactus/<int:pk>/actualizar/', ActualizarCactus.as_view(), name='cactus-actualizar'),
@@ -34,6 +38,5 @@ urlpatterns = [
                   path('foto/<int:pk>/actualizar/<int:pk_cactus>', ActualizarFotoCactus.as_view(),
                        name='foto-actualizar'),
                   path('foto/<int:pk>/eliminar/<int:pk_cactus>', EliminarFotoCactus.as_view(), name='foto-eliminar'),
-                  path('index', TemplateView.as_view(template_name='index.html'), name='index'),
                   path('search/', views.search, name='search'),
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

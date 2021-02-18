@@ -1,3 +1,5 @@
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
@@ -5,6 +7,7 @@ from django.db.models import Q
 from cactus.models import CactusModel, PictureModel
 
 
+@login_required
 def search(request):
     template = 'home.html'
 
@@ -17,41 +20,41 @@ def search(request):
     return render(request, template, context)
 
 
-class ListarCactus(ListView):
+class ListarCactus(LoginRequiredMixin, ListView):
     model = CactusModel
-    template_name = 'home.html'
+    template_name = 'templates/cactus/home.html'
     context_object_name = 'cactus'
     ordering = ['-cactus_date']
     paginate_by = 2
 
 
-class RegistrarCactus(CreateView):
+class RegistrarCactus(LoginRequiredMixin, CreateView):
     model = CactusModel
-    template_name = "formulario_cactus.html"
+    template_name = "templates/cactus/formulario_cactus.html"
     fields = ['cactus_name', 'cactus_scientific_name', 'cactus_description', 'cactus_size', 'cactus_picture',
               'cactus_date']
     success_url = reverse_lazy('cactus-listar')
 
 
-class ActualizarCactus(UpdateView):
+class ActualizarCactus(LoginRequiredMixin, UpdateView):
     model = CactusModel
-    template_name = 'formulario_cactus.html'
+    template_name = 'templates/cactus/formulario_cactus.html'
     fields = ['cactus_name', 'cactus_scientific_name', 'cactus_description', 'cactus_size', 'cactus_picture',
               'cactus_date']
     success_url = reverse_lazy('cactus-listar')
 
 
-class EliminarCactus(DeleteView):
+class EliminarCactus(LoginRequiredMixin, DeleteView):
     model = CactusModel
     success_url = reverse_lazy('cactus-listar')
-    template_name = 'confirmar_eliminar_cactus.html'
+    template_name = 'templates/cactus/confirmar_eliminar_cactus.html'
 
 
-class ListarImagenesCactus(ListView):
+class ListarImagenesCactus(LoginRequiredMixin, ListView):
     model = PictureModel
-    template_name = 'galeria_cactus.html'
+    template_name = 'templates/cactus/galeria_cactus.html'
     context_object_name = 'pictures'
-    paginate_by = 3
+    paginate_by = 6
 
     def get_queryset(self):
         cactus = get_object_or_404(CactusModel, id=self.kwargs.get('pk'))
@@ -63,9 +66,9 @@ class ListarImagenesCactus(ListView):
         return context
 
 
-class RegistrarFotoCactus(CreateView):
+class RegistrarFotoCactus(LoginRequiredMixin, CreateView):
     model = PictureModel
-    template_name = "formulario_foto_cactus.html"
+    template_name = "templates/cactus/formulario_foto_cactus.html"
     fields = ['picture_file']
 
     def get_success_url(self):
@@ -77,9 +80,9 @@ class RegistrarFotoCactus(CreateView):
         return super().form_valid(form)
 
 
-class ActualizarFotoCactus(UpdateView):
+class ActualizarFotoCactus(LoginRequiredMixin, UpdateView):
     model = PictureModel
-    template_name = "formulario_foto_cactus.html"
+    template_name = "templates/cactus/formulario_foto_cactus.html"
     fields = ['picture_file', 'picture_cactus']
 
     def get_success_url(self):
@@ -87,9 +90,9 @@ class ActualizarFotoCactus(UpdateView):
         return reverse_lazy('cactus-pictures', kwargs={'pk': cactus_id})
 
 
-class EliminarFotoCactus(DeleteView):
+class EliminarFotoCactus(LoginRequiredMixin, DeleteView):
     model = PictureModel
-    template_name = 'confirmar_eliminar_foto.html'
+    template_name = 'templates/cactus/confirmar_eliminar_foto.html'
 
     def get_success_url(self):
         cactus_id = self.kwargs['pk_cactus']
