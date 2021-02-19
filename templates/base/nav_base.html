@@ -25,9 +25,9 @@
         {% if user.is_authenticated %}
             <ul class="navbar-nav mr-4">
                 <li class="nav-item nav-icon">
-                    <a style="color: yellowgreen; font-size:20px" href="{% url 'profile' %}">
-                        <img src="{{ request.user.profile.image.url }}" height="35"
-                             class="d-inline-block align-top rounded-circle"/>
+                    <a href="{% url 'profile' %}">
+                        <img style="height: 40px; width: 40px" src="{{ request.user.profile.image.url }}" height="10"
+                             class="rounded-circle"/>
                     </a>
                 </li>
             </ul>

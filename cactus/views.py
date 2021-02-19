@@ -1,5 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
@@ -26,6 +27,9 @@ class ListarCactus(LoginRequiredMixin, ListView):
     context_object_name = 'cactus'
     ordering = ['-cactus_date']
     paginate_by = 2
+
+    def get_queryset(self):
+        return CactusModel.objects.filter(user_id=self.request.user.id)
 
 
 class RegistrarCactus(LoginRequiredMixin, CreateView):
