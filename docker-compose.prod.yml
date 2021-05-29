@@ -1,0 +1,21 @@
+version: "3"
+services:
+  web:
+    build: .
+    restart: on-failure
+    env_file:
+      - ./.env
+    command: gunicorn --bind 0.0.0.0:8003 cactugram.wsgi
+    ports:
+      - "8003:8003"
+    depends_on:
+      - nginx
+  nginx:
+    image: "nginx"
+    restart: always
+    volumes:
+      - ./nginx/conf.d:/etc/nginx/conf.d
+      - ./static:/static
+      - ./media:/media
+    ports:
+      - "80:80"

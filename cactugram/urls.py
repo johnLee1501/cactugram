@@ -41,4 +41,4 @@ urlpatterns = [
                        name='foto-actualizar'),
                   path('foto/<int:pk>/eliminar/<int:pk_cactus>', EliminarFotoCactus.as_view(), name='foto-eliminar'),
                   path('search/', views.search, name='search'),
-              ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+              ]
