@@ -140,3 +140,4 @@ target/
 .classpath
 .project
 /media
+/postgres
