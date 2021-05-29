@@ -25,6 +25,6 @@ RUN chown -R www-data:www-data /opt/app
 RUN dos2unix /opt/app/start-server.sh && apt-get --purge remove -y dos2unix && rm -rf /var/lib/apt/lists/*
 
 # start server
-EXPOSE 8020
+EXPOSE 8029
 STOPSIGNAL SIGTERM
 CMD ["/opt/app/start-server.sh"]
