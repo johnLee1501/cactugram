@@ -37,7 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
     'cactus',
+    'channels',
     'users.apps.UsersConfig',
     'crispy_forms',
 ]
@@ -72,6 +74,17 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'cactugram.wsgi.application'
+ASGI_APPLICATION = 'cactugram.routing.application'
+
+CHANNEL_LAYERS = {
+
+    "default": {
+
+        "BACKEND": "channels.layers.InMemoryChannelLayer"
+
+    }
+
+}
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases

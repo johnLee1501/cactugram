@@ -3,3 +3,6 @@ django-crispy-forms==1.10.0
 Pillow==8.1.0
 python-dotenv
 psycopg2==2.8.6
+channels==3.0.3
+djangorestframework==3.12.4
+djangochannelsrestframework==0.2.2
