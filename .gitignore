@@ -139,4 +139,5 @@ target/
 .settings/
 .classpath
 .project
-/media
+/media/pictures
+/media/profile_pics
