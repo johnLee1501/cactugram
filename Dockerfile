@@ -1,13 +1,4 @@
-FROM python:3.8-alpine
-
-RUN apk --update add \
-    build-base \
-    postgresql \
-    postgresql-dev \
-    libpq \
-    # pillow dependencies
-    jpeg-dev \
-    zlib-dev
+FROM python:3
 
 RUN mkdir /www
 WORKDIR /www
@@ -17,3 +8,4 @@ RUN pip install -r requirements.txt
 ENV PYTHONUNBUFFERED 1
 
 COPY . /www/
+
