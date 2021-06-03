@@ -18,7 +18,6 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.contrib.auth.views import LoginView, LogoutView
 from django.urls import path
-from django.views.generic import TemplateView
 
 from cactus import views
 from cactus.views import RegistrarCactus, RegistrarFotoCactus, ActualizarCactus, EliminarCactus, ListarCactus, \
